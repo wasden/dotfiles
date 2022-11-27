@@ -13,51 +13,82 @@ M.disabled = {
       ["<leader>ra"] = "",
       ["<leader>ca"] = "",
       ["<leader>f"] = "",
+      ["j"] = "",
+      ["k"] = "",
+  },
+  x = {
+      ["j"] = "",
+      ["k"] = "",
   }
 }
 
-M.bufferline = {
-   mode_opts = { silent = false }, -- this is completely optional
-   n = {
-      ["L"] = { "<cmd> BufferLineCycleNext <CR>", "  cycle next buffer" },
-      ["H"] = { "<cmd> BufferLineCyclePrev <CR>", "  cycle prev buffer" },
-   },
+M.tabufline = {
+  n = {
+    ["L"] = {
+      function()
+        require("nvchad_ui.tabufline").tabuflineNext()
+      end,
+      "  cycle next buffer",
+    },
+    ["H"] = {
+      function()
+        require("nvchad_ui.tabufline").tabuflinePrev()
+      end,
+      "  cycle prev buffer"
+    },
+  },
 }
 M.lspconfig = {
-   n = {
-      ["gh"] = {
-         function()
-            vim.lsp.buf.declaration()
-         end,
-         "   lsp declaration",
-      },
+  n = {
+    ["gh"] = {
+      function()
+        vim.lsp.buf.declaration()
+      end,
+      "   lsp declaration",
+    },
 
-      ["]d"] = {
-         function()
-            vim.diagnostic.goto_next()
-         end,
-         "   goto_next",
-      },
+    ["]d"] = {
+      function()
+        vim.diagnostic.goto_next()
+      end,
+      "   goto_next",
+    },
 
-      ["<leader>rn"] = {
-         function()
-            vim.lsp.buf.rename()
-         end,
-         "   lsp rename",
-      },
+    ["<leader>rn"] = {
+      function()
+        require("nvchad_ui.renamer").open()
+      end,
+      "   lsp rename",
+    },
 
-      ["<leader>fd"] = {
-         function()
-            vim.diagnostic.open_float()
-         end,
-         "   floating diagnostic",
-      },
-   },
+    ["<leader>fd"] = {
+      function()
+        vim.diagnostic.open_float()
+      end,
+      "   floating diagnostic",
+    },
+    ["<leader>gq"] = {
+      function()
+      vim.lsp.buf.formatting()
+      end,
+      "format"
+    },
+  },
+  v = {
+    ["<leader>gq"] = {
+      function()
+        vim.lsp.buf.formatting()
+      end,
+      "format"
+    },
+  }
 }
 
 M.telescope = {
    n = {
-      ["<C-p>"] = { "<cmd> Telescope <CR>", "   telescope buildin" },
+      ["<C-:>"] = { "<cmd> Telescope <CR>", "   telescope buildin" },
+      ["<C-?>"] = { "<cmd> Telescope command_history<CR>", "   telescope command_history" },
+      ["<C-/>"] = { "<cmd> Telescope current_buffer_fuzzy_find<CR>", "   telescope current_buffer_fuzzy_find" },
       ["sp"] = { "<cmd> Telescope find_files <CR>", "  find files" },
       ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "  find all" },
       ["<leader>lg"] = { "<cmd> Telescope live_grep <CR>", "   live grep" },
@@ -69,9 +100,9 @@ M.telescope = {
       ["sz"] = { "<cmd> Telescope zoxide list<CR>", "   cwd list" },
       ["sf"] = { "<cmd> Telescope funky<CR>", "   funky list" },
       ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "  help page" },
-      ["g]"] = { "<cmd> Telescope lsp_definitions path_display=tail <CR>", "   goto definition"},
-      ["gw"] = { "<cmd> Telescope lsp_definitions path_display=tail jump_type=vsplit <CR>", "   goto definition vsplit"},
-      ["gr"] = { "<cmd> Telescope lsp_references path_display=tail <CR>", "   goto references"},
+      -- ["g]"] = { "<cmd> Telescope lsp_definitions path_display=tail <CR>", "   goto definition"},
+      -- ["gw"] = { "<cmd> Telescope lsp_definitions path_display=tail jump_type=vsplit <CR>", "   goto definition vsplit"},
+      -- ["gr"] = { "<cmd> Telescope lsp_references path_display=tail <CR>", "   goto references"},
       ["sr"] = {
         function ()
           vim.ui.input({ prompt = 'input function name:' }, function (input)
@@ -85,17 +116,24 @@ M.telescope = {
    },
 }
 
+M.glance = {
+  n = {
+    ["g]"] = { "<cmd> Glance definitions<CR>", "   goto definition" },
+    ["gr"] = { "<cmd> Glance references<CR>", "   goto references" },
+  }
+}
+
 M.general = {
-  mode_opts = { silent = true }, -- this is completely optional
   i = {
-    ["<C-j>"] = { function ()
+    ["<C-l>"] = { function ()
       require('luasnip').jump(1)
     end,
-    " snippt down" },
-    ["<C-k>"] = { function ()
+      " snippt down" },
+    ["<C-h>"] = { function ()
       require('luasnip').jump(-1)
     end,
-    " snippt up" },
+      " snippt up" },
+    -- ["<C-Space>"] = {" "}
   },
 
   n = {
@@ -109,11 +147,11 @@ M.general = {
     -- },
     ["]n"] = { "<cmd> cn <CR>" , "   quickfix next"},
     ["[n"] = { "<cmd> cp <CR>" , "   quickfix prev"},
-    ["J"] = { "j", "" },
-    ["X"] = { '"_X', "" },
+    -- ["J"] = { "j", "" },
+    -- ["X"] = { '"_X', "" },
   },
   v = {
-    ["J"] = { "j", "" },
+    -- ["J"] = { "j", "" },
   }
 }
 
@@ -139,7 +177,7 @@ M.gitsigns = {
 }
 
 M.vim_eft = {
-  mode_opts = { silent = true, noremap = false },
+  -- mode_opts = { silent = true, noremap = false },
   n = {
     [";"] = { "<Plug>(eft-repeat)", ""},
     ["f"] = { "<Plug>(eft-f)", ""},

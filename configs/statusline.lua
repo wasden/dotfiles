@@ -49,7 +49,7 @@ local icon_styles = {
   },
 }
 
-local separator_style = icon_styles[nvchad.load_config().plugins.options.statusline.separator_style]
+local separator_style = icon_styles[require("core.utils").load_config().plugins.options.statusline.separator_style]
 
 -- Initialize the components table
 local components = {

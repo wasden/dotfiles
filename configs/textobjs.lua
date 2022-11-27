@@ -1,25 +1,4 @@
-local options = {
-  ensure_installed = {
-    "lua",
-    "vim",
-    "c",
-  },
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
-
-  -- incremental_selection = {
-  --   enable = true,
-  --   keymaps = {
-  --     init_selection = '<CR>',
-  --     node_incremental = '<CR>',
-  --     node_decremental = '<BS>',
-  --     scope_incremental = '<TAB>',
-  --   },
-  -- },
+return {
   textobjects = {
     select = {
       enable = true,
@@ -33,15 +12,20 @@ local options = {
         ["if"] = "@function.inner",
         ["aa"] = "@parameter.outer",
         ["ia"] = "@parameter.inner",
-        ["ac"] = "@comment.outer",
-        ["ic"] = "@comment.outer",
-        ["ai"] = "@conditional.outer",
-        ["ii"] = "@conditional.inner",
-        ["al"] = "@loop.outer",
-        ["il"] = "@loop.inner",
+        -- ["ac"] = "@comment.outer",
+        -- ["ic"] = "@comment.outer",
+        -- ["ai"] = "@conditional.outer",
+        -- ["ii"] = "@conditional.inner",
+        -- ["al"] = "@loop.outer",
+        -- ["il"] = "@loop.inner",
         -- ["ir"] = "@call.inner",
         -- ["ar"] = "@call.outer",
       },
+      selection_modes = {
+        ['@function.inner'] = 'v', -- charwise
+        ['@function.outer'] = '<c-v>', -- linewise
+      },
+      include_surrounding_whitespace = false,
     },
     swap = {
       enable = true,
@@ -58,36 +42,35 @@ local options = {
       goto_next_start = {
         ["]f"] = "@function.outer",
         ["]a"] = "@parameter.outer",
-        ["]i"] = "@conditional.outer",
-        ["]l"] = "@loop.outer",
-        ["]c"] = "@comment.outer",
+        -- ["]i"] = "@conditional.outer",
+        -- ["]l"] = "@loop.outer",
+        -- ["]c"] = "@comment.outer",
         -- ["]r"] = "@call.outer",
       },
       goto_next_end = {
         ["]F"] = "@function.outer",
         ["]A"] = "@parameter.outer",
-        ["]I"] = "@conditional.outer",
-        ["]L"] = "@loop.outer",
-        ["]C"] = "@comment.outer",
+        -- ["]I"] = "@conditional.outer",
+        -- ["]L"] = "@loop.outer",
+        -- ["]C"] = "@comment.outer",
         -- ["]R"] = "@call.outer",
       },
       goto_previous_start = {
         ["[f"] = "@function.outer",
         ["[a"] = "@parameter.outer",
-        ["[i"] = "@conditional.outer",
-        ["[l"] = "@loop.outer",
-        ["[c"] = "@comment.outer",
+        -- ["[i"] = "@conditional.outer",
+        -- ["[l"] = "@loop.outer",
+        -- ["[c"] = "@comment.outer",
         -- ["[r"] = "@call.outer",
       },
       goto_previous_end = {
         ["[F"] = "@function.outer",
         ["[A"] = "@param.outer",
-        ["[I"] = "@conditional.outer",
-        ["[L"] = "@loop.outer",
-        ["[C"] = "@comment.outer",
+        -- ["[I"] = "@conditional.outer",
+        -- ["[L"] = "@loop.outer",
+        -- ["[C"] = "@comment.outer",
         -- ["[r"] = "@call.outer",
       },
     },
   }
 }
-return options
